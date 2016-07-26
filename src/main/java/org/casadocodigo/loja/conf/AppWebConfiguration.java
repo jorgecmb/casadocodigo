@@ -23,17 +23,20 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan(basePackageClasses={HomeController.class, ProdutoDAO.class, FileSaver.class, CarrinhoCompras.class})
 public class AppWebConfiguration extends WebMvcConfigurerAdapter{
 
+	//Onde estão as views
 	@Bean
 	public InternalResourceViewResolver internalResourceViewResolver(){
 		 InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		 resolver.setPrefix("/WEB-INF/views/");
 		 resolver.setSuffix(".jsp");
 		 
+		 //Quais beans serão expostos ao JSP
 		 resolver.setExposedContextBeanNames("carrinhoCompras");
 		 
 		 return resolver;
 	}
 	
+	//Mensagens de erro em arquivo .properties
 	@Bean
 	public MessageSource messageSource() {
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
@@ -43,6 +46,7 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter{
 		return messageSource;
 	}
 	
+	//Formatação de data
 	@Bean
 	public FormattingConversionService mvcConversionService() {
 		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
@@ -54,11 +58,13 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter{
 		return conversionService;
 	}
 	
+	//Fazer upload de arquivos multipart
 	@Bean
 	public MultipartResolver multipartResolver() {
 		return new StandardServletMultipartResolver();
 	}
 	
+	//Acessar os css
 	@Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
