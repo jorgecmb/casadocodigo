@@ -38,12 +38,13 @@
 	    <link href="${contextPath}resources/css/produtos.css" 
 	    	rel="stylesheet" type="text/css"  media="all"  />
 		<link rel="canonical" href="http://www.casadocodigo.com.br/" />	
+		<%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 </head>
 <body class="produto">
 
   <header id="layout-header">
 		<div class="clearfix container">
-			<a href="/" id="logo">
+			<a href="${s:mvcUrl('HC#index').build() }" id="logo">
 			</a>
 			<div id="header-content">
 				<nav id="main-nav">
