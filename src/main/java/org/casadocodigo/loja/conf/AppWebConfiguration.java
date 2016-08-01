@@ -10,7 +10,6 @@ import org.casadocodigo.loja.infra.FileSaver;
 import org.casadocodigo.loja.models.CarrinhoCompras;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.cache.guava.GuavaCacheManager;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -79,7 +78,8 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter{
 		return new StandardServletMultipartResolver();
 	}
 	
-	//Acessar os css
+	//Acessar os links relativos diretos (css, JS, resources...)
+	//Liberando o servlet default (que não o Spring) a acessar os recursos
 	@Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
