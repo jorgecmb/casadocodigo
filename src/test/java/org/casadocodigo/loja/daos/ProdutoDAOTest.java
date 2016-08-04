@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.casadocodigo.loja.builder.ProdutoBuilder;
+import org.casadocodigo.loja.conf.DataSourceConfigurationTest;
 import org.casadocodigo.loja.conf.JPAConfiguration;
 import org.casadocodigo.loja.models.Produto;
 import org.casadocodigo.loja.models.TipoPreco;
@@ -11,12 +12,15 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class) //Spring vai cuidar do contexto
-@ContextConfiguration(classes={JPAConfiguration.class, ProdutoDAO.class})
+@ContextConfiguration(classes={JPAConfiguration.class, ProdutoDAO.class,
+		DataSourceConfigurationTest.class})
+@ActiveProfiles("test")
 public class ProdutoDAOTest {
 
 	@Autowired
