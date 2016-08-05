@@ -2,6 +2,7 @@ package org.casadocodigo.loja.conf;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.casadocodigo.loja.controllers.HomeController;
@@ -19,6 +20,8 @@ import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartResolver;
@@ -129,5 +132,24 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter{
 	@Bean
 	public LocaleResolver localeResolver() {
 		return new CookieLocaleResolver();
+	}
+	
+	//Enviar emails
+	@Bean
+	public MailSender mailSender() {
+		JavaMailSenderImpl sender = new JavaMailSenderImpl();
+		sender.setHost("smtp.gmail.com");
+		sender.setUsername("alura.springmvc@gmail.com");
+		sender.setPassword("alura2015");
+		sender.setPort(587);
+		
+		//Habilitando TLS - autenticação
+		Properties mailProp = new Properties();
+		mailProp.put("mail.smtp.auth", true);
+		mailProp.put("mail.smpt.starttls.enable", true);
+		
+		sender.setJavaMailProperties(mailProp);
+		
+		return sender;
 	}
 }
